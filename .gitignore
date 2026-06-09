@@ -1,0 +1,44 @@
+﻿# =========================
+# ProofForge Root Ignore
+# =========================
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Node / React
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Java / Maven
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Uploads / generated files
+uploads/
+generated/
+reports/
+
+# ProofForge local scan output
+.pf-cache/
+.pf-temp/
