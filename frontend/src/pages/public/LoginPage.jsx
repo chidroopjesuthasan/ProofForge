@@ -1,42 +1,48 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/ui/Button.jsx";
-import Card from "../../components/ui/Card.jsx";
+import Panel from "../../components/ui/Panel.jsx";
+import Tag from "../../components/ui/Tag.jsx";
 
 function LoginPage() {
   return (
-    <section className="pf-container flex justify-center py-16">
-      <Card className="w-full max-w-md">
-        <h1 className="text-2xl font-semibold text-[#2f2420]">Login</h1>
-        <p className="mt-2 text-sm text-[#7a665e]">
-          Authentication will be connected in Phase 04.
+    <section className="pf-shell-bg flex min-h-[calc(100vh-64px)] items-center justify-center px-4 py-16">
+      <Panel className="w-full max-w-md p-6">
+        <Tag mode="dark">Workspace access</Tag>
+
+        <h1 className="mt-4 text-2xl font-semibold text-[var(--pf-black)]">
+          Sign in to ProofForge
+        </h1>
+
+        <p className="mt-2 text-sm leading-6 text-[var(--pf-600)]">
+          Access your verification workspace, manage evidence, run analysis,
+          and generate structured ProofForge Dossiers.
         </p>
 
         <form className="mt-6 space-y-4">
-          <input
-            className="w-full rounded-lg border border-[#eadfd7] bg-white px-4 py-2.5 text-sm outline-none focus:border-[#7f1d1d]"
-            placeholder="Email address"
-          />
+          <div>
+            <label className="pf-label">Email address</label>
+            <input className="pf-input" placeholder="candidate@example.com" />
+          </div>
 
-          <input
-            className="w-full rounded-lg border border-[#eadfd7] bg-white px-4 py-2.5 text-sm outline-none focus:border-[#7f1d1d]"
-            placeholder="Password"
-            type="password"
-          />
+          <div>
+            <label className="pf-label">Password</label>
+            <input className="pf-input" placeholder="Password" type="password" />
+          </div>
 
           <Link to="/dashboard">
-            <Button className="w-full" type="button">
-              Continue to dashboard
+            <Button variant="black" className="w-full" type="button">
+              Continue to workspace
             </Button>
           </Link>
         </form>
 
-        <p className="mt-6 text-center text-sm text-[#7a665e]">
+        <p className="mt-6 text-center text-sm text-[var(--pf-600)]">
           New to ProofForge?{" "}
-          <Link className="font-medium text-[#7f1d1d]" to="/register">
+          <Link className="font-bold text-[var(--pf-black)] underline" to="/register">
             Create account
           </Link>
         </p>
-      </Card>
+      </Panel>
     </section>
   );
 }

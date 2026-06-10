@@ -1,25 +1,46 @@
 import Button from "../../components/ui/Button.jsx";
-import Card from "../../components/ui/Card.jsx";
 import PageHeader from "../../components/ui/PageHeader.jsx";
+import Panel from "../../components/ui/Panel.jsx";
 
 function NewProjectPage() {
   return (
-    <div className="max-w-3xl space-y-6">
+    <div className="max-w-4xl space-y-6">
       <PageHeader
-        eyebrow="Project Setup"
+        eyebrow="Project Intake"
         title="Create Project"
-        description="Project creation API will be connected in Phase 05."
+        description="This form will connect to the backend project API in Phase 05."
       />
 
-      <Card>
-        <form className="space-y-4">
-          <input className="w-full rounded-lg border border-[#eadfd7] bg-white px-4 py-2.5 text-sm outline-none focus:border-[#7f1d1d]" placeholder="Project title" />
-          <textarea className="min-h-32 w-full rounded-lg border border-[#eadfd7] bg-white px-4 py-2.5 text-sm outline-none focus:border-[#7f1d1d]" placeholder="Project description" />
-          <input className="w-full rounded-lg border border-[#eadfd7] bg-white px-4 py-2.5 text-sm outline-none focus:border-[#7f1d1d]" placeholder="Tech stack, example: React, Spring Boot, H2, Gemini API" />
+      <Panel className="p-6">
+        <form className="grid gap-5">
+          <div>
+            <label className="pf-label">Project title</label>
+            <input className="pf-input" placeholder="Example: AI Code Review Platform" />
+          </div>
 
-          <Button type="button">Save Project Later</Button>
+          <div>
+            <label className="pf-label">Project description</label>
+            <textarea className="pf-input min-h-32" placeholder="Explain the problem, users, features, and your contribution." />
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <div>
+              <label className="pf-label">Category</label>
+              <input className="pf-input" placeholder="AI SaaS, Full Stack, Mobile, Data, etc." />
+            </div>
+
+            <div>
+              <label className="pf-label">Tech stack</label>
+              <input className="pf-input" placeholder="React, Spring Boot, H2, Gemini API" />
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <Button variant="black" type="button">Save Project Later</Button>
+            <Button type="button">Cancel</Button>
+          </div>
         </form>
-      </Card>
+      </Panel>
     </div>
   );
 }

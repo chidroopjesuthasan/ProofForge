@@ -1,20 +1,23 @@
-import Card from "../../components/ui/Card.jsx";
 import PageHeader from "../../components/ui/PageHeader.jsx";
+import Panel from "../../components/ui/Panel.jsx";
+import Tag from "../../components/ui/Tag.jsx";
 
 function EvidencePage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Evidence"
+        eyebrow="Evidence Intake"
         title="Evidence Links"
-        description="Phase 06 will add GitHub, deployment, document, screenshot, and demo video evidence management."
+        description="Phase 06 will add GitHub, deployment, documentation, screenshot, demo video, and external proof management."
       />
 
-      <Card>
-        <p className="text-sm text-[#7a665e]">
-          Evidence form and evidence list will be added here.
+      <Panel className="p-5">
+        <Tag>Coming in Phase 06</Tag>
+        <p className="mt-4 text-sm leading-6 text-[var(--pf-600)]">
+          Evidence is the first trust layer. ProofForge will collect and later verify
+          links that support the candidate project claims.
         </p>
-      </Card>
+      </Panel>
     </div>
   );
 }

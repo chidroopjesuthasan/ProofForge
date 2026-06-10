@@ -7,20 +7,31 @@ function ProjectsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Workspace"
-        title="Projects"
-        description="Manage candidate projects and prepare evidence for ProofForge analysis."
+        eyebrow="Projects"
+        title="Candidate Projects"
+        description="Create projects, attach proof evidence, upload source files, and generate verification dossiers."
         action={
           <Link to="/projects/new">
-            <Button>New Project</Button>
+            <Button variant="black">New Project</Button>
           </Link>
         }
+        tabs={[
+          { label: "All", href: "#", active: true },
+          { label: "Draft", href: "#" },
+          { label: "Evidence Added", href: "#" },
+          { label: "Analyzed", href: "#" },
+          { label: "Dossier Ready", href: "#" },
+        ]}
       />
 
       <EmptyState
-        title="No projects yet"
-        description="Create your first project. Later, you will attach GitHub links, deployment links, upload ZIP files, and generate ProofForge Dossiers."
-        actionLabel="Create Project"
+        title="No projects found"
+        description="Create your first project. Then attach GitHub links, deployment links, upload ZIP files, run AI analysis, and generate a ProofForge Dossier."
+        action={
+          <Link to="/projects/new">
+            <Button variant="black">Create first project</Button>
+          </Link>
+        }
       />
     </div>
   );

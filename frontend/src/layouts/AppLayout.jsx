@@ -1,20 +1,18 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/navigation/Sidebar.jsx";
-import Topbar from "../components/navigation/Topbar.jsx";
+import WorkspaceSidebar from "../components/navigation/WorkspaceSidebar.jsx";
+import WorkspaceTopbar from "../components/navigation/WorkspaceTopbar.jsx";
 
 function AppLayout() {
   return (
-    <div className="min-h-screen bg-[#fffaf5] text-[#2f2420]">
+    <div className="min-h-screen bg-[var(--pf-canvas)] text-[var(--pf-900)]">
+      <WorkspaceTopbar />
+
       <div className="flex">
-        <Sidebar />
+        <WorkspaceSidebar />
 
-        <div className="min-h-screen flex-1">
-          <Topbar />
-
-          <main className="px-4 py-6 lg:px-8">
-            <Outlet />
-          </main>
-        </div>
+        <main className="min-h-[calc(100vh-64px)] flex-1 px-4 py-6 md:px-6 lg:px-8">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

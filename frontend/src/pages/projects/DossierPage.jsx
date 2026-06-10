@@ -1,6 +1,7 @@
-import Badge from "../../components/ui/Badge.jsx";
-import Card from "../../components/ui/Card.jsx";
+import MetricCard from "../../components/ui/MetricCard.jsx";
 import PageHeader from "../../components/ui/PageHeader.jsx";
+import Panel from "../../components/ui/Panel.jsx";
+import Tag from "../../components/ui/Tag.jsx";
 
 function DossierPage() {
   return (
@@ -8,22 +9,23 @@ function DossierPage() {
       <PageHeader
         eyebrow="Dossier"
         title="ProofForge Dossier"
-        description="Phase 11 will generate the full dossier with proof strength, skill mapping, architecture summary, and evidence scoring."
+        description="Phase 11 will generate the final recruiter-ready verification report."
       />
 
-      <Card>
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 className="text-lg font-semibold text-[#2f2420]">
-              Dossier Preview
-            </h2>
-            <p className="mt-1 text-sm text-[#7a665e]">
-              Proof score, skills, evidence, and risk flags will appear here.
-            </p>
-          </div>
-          <Badge tone="cream">Pending Analysis</Badge>
-        </div>
-      </Card>
+      <div className="grid gap-4 md:grid-cols-3">
+        <MetricCard label="Proof Strength" value="--" helper="Pending analysis" />
+        <MetricCard label="Detected Skills" value="--" helper="Pending analysis" />
+        <MetricCard label="Risk Level" value="--" helper="Pending analysis" />
+      </div>
+
+      <Panel className="p-5">
+        <Tag>Pending Analysis</Tag>
+        <p className="mt-4 text-sm leading-6 text-[var(--pf-600)]">
+          The final dossier will contain proof strength, score breakdown,
+          architecture summary, skill mapping, evidence traceability, proofmarked files,
+          AI findings, and reviewer notes.
+        </p>
+      </Panel>
     </div>
   );
 }

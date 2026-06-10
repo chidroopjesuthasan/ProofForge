@@ -1,13 +1,14 @@
 import { Link, useParams } from "react-router-dom";
-import Badge from "../../components/ui/Badge.jsx";
-import Card from "../../components/ui/Card.jsx";
+import PageHeader from "../../components/ui/PageHeader.jsx";
+import Panel from "../../components/ui/Panel.jsx";
+import Tag from "../../components/ui/Tag.jsx";
 
 const tabs = [
-  { label: "Evidence", path: "evidence" },
-  { label: "Upload", path: "upload" },
-  { label: "Files", path: "files" },
-  { label: "Analysis", path: "analysis" },
-  { label: "Dossier", path: "dossier" },
+  { label: "Evidence", path: "evidence", desc: "External proof links and references" },
+  { label: "Upload", path: "upload", desc: "Project ZIP source archive" },
+  { label: "Files", path: "files", desc: "Scanned tree and proofmarks" },
+  { label: "Analysis", path: "analysis", desc: "AI findings and risk notes" },
+  { label: "Dossier", path: "dossier", desc: "Final verification report" },
 ];
 
 function ProjectDetailsPage() {
@@ -15,27 +16,20 @@ function ProjectDetailsPage() {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <Badge tone="maroon">Project Workspace</Badge>
+      <PageHeader
+        eyebrow="Project Workspace"
+        title={`Project #${projectId}`}
+        description="Manage the full verification pipeline: evidence, uploads, file scanning, AI analysis, and dossier generation."
+        action={<Tag>Draft</Tag>}
+      />
 
-        <h1 className="mt-4 text-3xl font-semibold text-[#2f2420]">
-          Project #{projectId}
-        </h1>
-
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-[#7a665e]">
-          This workspace will hold evidence, uploads, file scanning, AI analysis,
-          and ProofForge Dossier generation.
-        </p>
-      </Card>
-
-      <div className="grid gap-3 md:grid-cols-5">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {tabs.map((tab) => (
-          <Link
-            key={tab.path}
-            to={`/projects/${projectId}/${tab.path}`}
-            className="rounded-xl border border-[#eadfd7] bg-white p-4 text-sm font-medium text-[#6b4e45] transition hover:border-[#7f1d1d] hover:bg-[#fff0ed] hover:text-[#7f1d1d]"
-          >
-            {tab.label}
+          <Link key={tab.path} to={`/projects/${projectId}/${tab.path}`}>
+            <Panel className="pf-panel-hover h-full p-5">
+              <p className="font-bold text-[var(--pf-black)]">{tab.label}</p>
+              <p className="mt-2 text-sm leading-6 text-[var(--pf-600)]">{tab.desc}</p>
+            </Panel>
           </Link>
         ))}
       </div>

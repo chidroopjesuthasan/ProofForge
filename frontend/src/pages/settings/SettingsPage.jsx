@@ -1,5 +1,5 @@
-import Card from "../../components/ui/Card.jsx";
 import PageHeader from "../../components/ui/PageHeader.jsx";
+import Panel from "../../components/ui/Panel.jsx";
 
 function SettingsPage() {
   return (
@@ -7,14 +7,14 @@ function SettingsPage() {
       <PageHeader
         eyebrow="Account"
         title="Settings"
-        description="User profile, preferences, and account settings will be connected after authentication."
+        description="User profile, workspace preferences, and account controls will be connected after authentication."
       />
 
-      <Card>
-        <p className="text-sm text-[#7a665e]">
-          Settings placeholder.
+      <Panel className="p-5">
+        <p className="text-sm leading-6 text-[var(--pf-600)]">
+          Settings placeholder. Phase 04 will introduce real user identity and protected access.
         </p>
-      </Card>
+      </Panel>
     </div>
   );
 }
