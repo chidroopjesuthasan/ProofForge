@@ -1,10 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { workspaceGroups } from "../../data/proofForgeContent.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 import Button from "../ui/Button.jsx";
 
 function WorkspaceTopbar() {
   const [open, setOpen] = useState(false);
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--pf-line-dark)] bg-[var(--pf-black)] text-white">
@@ -44,6 +52,20 @@ function WorkspaceTopbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <div className="hidden text-right md:block">
+            <p className="text-xs font-bold text-white">
+              {user?.fullName || "Candidate"}
+            </p>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="text-xs text-[var(--pf-300)] hover:text-white"
+            >
+              Logout
+            </button>
+          </div>
+
           <Button variant="inverted" size="sm">New Project</Button>
 
           <button

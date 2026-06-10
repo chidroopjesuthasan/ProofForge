@@ -3,10 +3,10 @@ server:
 
 spring:
   application:
-    name: ProofForge
+    name: ProofForge API
 
   datasource:
-    url: jdbc:h2:mem:proofforge_dev
+    url: jdbc:h2:mem:proofforge_dev_db
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -19,23 +19,44 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
 
-  servlet:
-    multipart:
-      max-file-size: 25MB
-      max-request-size: 25MB
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:google-dev-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:google-dev-client-secret}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 
-logging:
-  level:
-    org.springframework.security: INFO
-    org.hibernate.SQL: DEBUG
+          github:
+            client-id: ${GITHUB_CLIENT_ID:github-dev-client-id}
+            client-secret: ${GITHUB_CLIENT_SECRET:github-dev-client-secret}
+            scope:
+              - read:user
+              - user:email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 
 proofforge:
   app:
-    name: ProofForge
-    phase: phase-02-backend-foundation
-    version: v2
+    name: ProofForge API
+    version: 0.4.0
+    phase: phase-04-authentication
+
+  frontend-url: ${PF_FRONTEND_URL:http://localhost:5173}
+
+  cors:
+    allowed-origins: ${PF_CORS_ALLOWED_ORIGINS:http://localhost:5173}
+
+  security:
+    jwt:
+      secret: ${PF_JWT_SECRET:proof-forge-development-secret-must-be-at-least-sixty-four-characters-long-change-me}
+      expiration-minutes: ${PF_JWT_EXPIRATION_MINUTES:1440}

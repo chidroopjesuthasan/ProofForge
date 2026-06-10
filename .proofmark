@@ -1,0 +1,12 @@
+backend/src/main/java/com/proofforge/project/ProjectStatus.java
+backend/src/main/java/com/proofforge/project/CandidateProject.java
+backend/src/main/java/com/proofforge/project/CandidateProjectRepository.java
+backend/src/main/java/com/proofforge/project/dto/ProjectRequest.java
+backend/src/main/java/com/proofforge/project/dto/ProjectResponse.java
+backend/src/main/java/com/proofforge/project/service/AuthenticatedUserService.java
+backend/src/main/java/com/proofforge/project/service/ProjectService.java
+backend/src/main/java/com/proofforge/project/ProjectController.java
+frontend/src/api/projectApi.js
+frontend/src/pages/ProjectsPage.jsx
+frontend/src/pages/NewProjectPage.jsx
+frontend/src/pages/ProjectDetailsPage.jsx
