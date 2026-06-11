@@ -42,3 +42,11 @@ reports/
 # ProofForge local scan output
 .pf-cache/
 .pf-temp/
+
+# ProofForge local runtime uploads
+backend/runtime/
+backend/runtime/**
+
+# ProofForge local runtime uploads
+backend/runtime/
+backend/runtime/**

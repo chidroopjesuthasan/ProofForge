@@ -114,7 +114,7 @@ function ProjectDetailsPage() {
           )}
         </Panel>
       </div>
-        <UploadSection projectId={id} />
+        <UploadSection projectId={projectId} />
 
 
       <EvidenceSection projectId={projectId} />

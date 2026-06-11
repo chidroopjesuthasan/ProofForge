@@ -1,4 +1,9 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+const RAW_API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+
+const API_BASE_URL = RAW_API_BASE_URL.endsWith("/api")
+  ? RAW_API_BASE_URL
+  : `${RAW_API_BASE_URL.replace(/\/$/, "")}/api`;
 
 function getAuthHeaders() {
   const token = localStorage.getItem("pf_access_token");
@@ -17,25 +22,30 @@ async function parseResponse(response) {
     return null;
   }
 
-  let data = null;
+  let body = null;
 
   try {
-    data = await response.json();
+    body = await response.json();
   } catch {
-    data = null;
+    body = null;
   }
 
   if (!response.ok) {
     const message =
-      data?.message ||
-      data?.error ||
-      data?.detail ||
+      body?.message ||
+      body?.error ||
+      body?.detail ||
+      body?.data?.message ||
       `Request failed with status ${response.status}`;
 
     throw new Error(message);
   }
 
-  return data;
+  if (body && typeof body === "object" && "success" in body && "data" in body) {
+    return body.data;
+  }
+
+  return body;
 }
 
 export async function uploadProjectZip(projectId, file) {
