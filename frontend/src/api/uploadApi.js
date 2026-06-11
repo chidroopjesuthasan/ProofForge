@@ -18,34 +18,37 @@ function getAuthHeaders() {
 }
 
 async function parseResponse(response) {
-  if (response.status === 204) {
-    return null;
-  }
+  const text = await response.text();
 
-  let body = null;
+  let data = null;
 
-  try {
-    body = await response.json();
-  } catch {
-    body = null;
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = text;
+    }
   }
 
   if (!response.ok) {
     const message =
-      body?.message ||
-      body?.error ||
-      body?.detail ||
-      body?.data?.message ||
+      data?.message ||
+      data?.error ||
       `Request failed with status ${response.status}`;
 
     throw new Error(message);
   }
 
-  if (body && typeof body === "object" && "success" in body && "data" in body) {
-    return body.data;
-  }
+  return data;
+}
 
-  return body;
+export async function listProjectUploads(projectId) {
+  const response = await fetch(`${API_BASE_URL}/projects/${projectId}/uploads`, {
+    method: "GET",
+    headers: getAuthHeaders(),
+  });
+
+  return parseResponse(response);
 }
 
 export async function uploadProjectZip(projectId, file) {
@@ -54,36 +57,9 @@ export async function uploadProjectZip(projectId, file) {
 
   const response = await fetch(`${API_BASE_URL}/projects/${projectId}/uploads`, {
     method: "POST",
-    headers: {
-      ...getAuthHeaders(),
-    },
+    headers: getAuthHeaders(),
     body: formData,
   });
-
-  return parseResponse(response);
-}
-
-export async function getProjectUploads(projectId) {
-  const response = await fetch(`${API_BASE_URL}/projects/${projectId}/uploads`, {
-    method: "GET",
-    headers: {
-      ...getAuthHeaders(),
-    },
-  });
-
-  return parseResponse(response);
-}
-
-export async function getProjectUpload(projectId, uploadId) {
-  const response = await fetch(
-    `${API_BASE_URL}/projects/${projectId}/uploads/${uploadId}`,
-    {
-      method: "GET",
-      headers: {
-        ...getAuthHeaders(),
-      },
-    }
-  );
 
   return parseResponse(response);
 }
@@ -93,11 +69,14 @@ export async function deleteProjectUpload(projectId, uploadId) {
     `${API_BASE_URL}/projects/${projectId}/uploads/${uploadId}`,
     {
       method: "DELETE",
-      headers: {
-        ...getAuthHeaders(),
-      },
+      headers: getAuthHeaders(),
     }
   );
 
   return parseResponse(response);
 }
+
+// Compatibility aliases.
+export const getProjectUploads = listProjectUploads;
+export const uploadZip = uploadProjectZip;
+export const deleteUpload = deleteProjectUpload;
