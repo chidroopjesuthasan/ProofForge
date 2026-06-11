@@ -1,3 +1,4 @@
+import UploadSection from "../../components/uploads/UploadSection";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import EvidenceSection from "../../components/evidence/EvidenceSection.jsx";
@@ -113,6 +114,8 @@ function ProjectDetailsPage() {
           )}
         </Panel>
       </div>
+        <UploadSection projectId={id} />
+
 
       <EvidenceSection projectId={projectId} />
     </div>
